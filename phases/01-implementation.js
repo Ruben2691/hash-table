@@ -9,8 +9,9 @@ class KeyValuePair {
 class HashTable { // get O(1), set O(1), deleteKey O(1)
 
   constructor(numBuckets = 8) {
-    // Initialize your buckets here
-    // Your code here 
+    this.count = 0
+    this.capacity = numBuckets
+    this.data = new Array(this.capacity).fill(null)
   }
 
   hash(key) {
@@ -30,22 +31,38 @@ class HashTable { // get O(1), set O(1), deleteKey O(1)
 
 
   insert(key, value) {
-    // Your code here 
+   const index = this.hashMod(key)
+   const node = new KeyValuePair(key, value)
+  
+      let listHead = this.data[index]
+      while(listHead && listHead.key !== key){
+        listHead = listHead.next
+
+      }
+      if(listHead) {
+        listHead.value = value
+      }else{
+       node.next = this.data[index]
+      this.data[index] = node
+      this.count++
+      }
+
+
   }
 
 
   read(key) {
-    // Your code here 
+    // Your code here
   }
 
 
   resize() {
-    // Your code here 
+    // Your code here
   }
 
 
   delete(key) {
-    // Your code here 
+    // Your code here
   }
 }
 
